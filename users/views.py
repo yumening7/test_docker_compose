@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -5,6 +8,7 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()
+
 
 @api_view(['POST'])
 def signup(request):
@@ -17,6 +21,7 @@ def signup(request):
         user.set_password(password)
         user.save()
     return Response({'id': user.id, 'email': user.email}, status=status.HTTP_201_CREATED)
+
 
 @api_view(['POST'])
 def signin(request):
@@ -33,4 +38,3 @@ def me(request):
     if request.user.is_authenticated:
         return Response({'id': request.user.id, 'email': request.user.email}, status=status.HTTP_200_OK)
     return Response({'error': 'Not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
-

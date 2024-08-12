@@ -6,4 +6,3 @@ urlpatterns = [
     path('signin/', signin, name='signin'),
     path('me/', me, name='me'),
 ]
-
